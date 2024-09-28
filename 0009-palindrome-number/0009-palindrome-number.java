@@ -2,24 +2,26 @@ class Solution
  {
     public boolean isPalindrome(int x) 
     {
-        String s=""+x;String rev="";char c;int i;boolean a;
-        for( i=0;i<s.length();i++)
-        {
-            c=s.charAt(i);
-            rev=c+rev;
+        char s[]=(""+x).toCharArray();
 
-        }
-        System.out.println(rev);
-    if(rev.equals(s))
-     return true;
-     else 
-     return false;
-    }
-     
+      int lp=0;
+      int rp=s.length-1;
+       while(lp<rp)
+       {
+        char t=s[lp];
+        s[lp]=s[rp];
+        s[rp]=t;
+        lp++;
+        rp--;
+       }
+       
+       String t = new String(s);
+        return (t.equals(""+x));
+
 
 
     
     
     }
-
+ }
 
