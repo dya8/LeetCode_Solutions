@@ -5,7 +5,7 @@ class Solution
         Arrays.sort(skill); // Sort the skills in ascending order
         int n = skill.length;
         int totalSkill = skill[0] + skill[n - 1]; // The expected total skill for each team
-        int sumChemistry = 0;
+        long sumChemistry = 0l;
 
         // Create teams of two players with equal total skill
         for (int i = 0; i < n / 2; i++)
