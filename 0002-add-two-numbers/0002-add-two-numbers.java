@@ -41,8 +41,8 @@ class Solution
          
             }
 
-            if(carry == 1)
-            ptr.next = new ListNode(1);
+            if(carry >= 1)
+            ptr.next = new ListNode(carry);
             ptr=ptr.next;
 
             return result.next;
