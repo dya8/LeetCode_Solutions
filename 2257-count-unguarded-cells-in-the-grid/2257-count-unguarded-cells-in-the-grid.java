@@ -1,44 +1,48 @@
 class Solution {
     public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
-        // Initialize grid with zeros
-        int[][] g = new int[m][n];
-        
-        // Mark guards and walls as 2
-        for (int[] e : guards) {
-            g[e[0]][e[1]] = 2;
+        char[][] grid=new char[m][n];
+        for(int i=0;i<m;i++){
+            Arrays.fill(grid[i],' ');
         }
-        for (int[] e : walls) {
-            g[e[0]][e[1]] = 2;
+        for(int[] wall:walls){
+            grid[wall[0]][wall[1]]='W';
         }
-        
-        // Directions: up, right, down, left
-        int[] dirs = {-1, 0, 1, 0, -1};
-        
-        // Process each guard's line of sight
-        for (int[] e : guards) {
-            for (int k = 0; k < 4; ++k) {
-                int x = e[0], y = e[1];
-                int dx = dirs[k], dy = dirs[k + 1];
-                
-                // Check cells in current direction until hitting boundary or obstacle
-                while (x + dx >= 0 && x + dx < m && y + dy >= 0 && y + dy < n && g[x + dx][y + dy] < 2) {
-                    x += dx;
-                    y += dy;
-                    g[x][y] = 1;
+        for(int[] guard:guards){
+            grid[guard[0]][guard[1]]='G';
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]=='G'){
+                    //RIGHT
+                    for(int k=j+1;k<n;k++){
+                        if(grid[i][k]=='W' || grid[i][k]=='G')break;
+                        grid[i][k]='B';
+                    }// LEFT
+                    for (int k=j-1;k>=0;k--) {
+                        if(grid[i][k]=='W'||grid[i][k]=='G') break;
+                        grid[i][k]='B';
+                    }
+                    // DOWN
+                    for (int k=i+1;k<m;k++) {
+                        if(grid[k][j]=='W' || grid[k][j]=='G') break;
+                        grid[k][j] = 'B';
+                    }
+                    // UP
+                    for (int k=i-1;k>=0;k--){
+                        if(grid[k][j]=='W' || grid[k][j]=='G') break;
+                        grid[k][j]='B';
+                    }
                 }
             }
         }
-        
-        // Count unguarded cells (cells with value 0)
-        int unguardedCount = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (g[i][j] == 0) {
-                    unguardedCount++;
+        int count=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++) {
+                if(grid[i][j]==' ') {
+                    count++;
                 }
             }
         }
-        
-        return unguardedCount;
+        return count;
     }
 }
