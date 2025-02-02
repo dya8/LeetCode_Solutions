@@ -4,11 +4,11 @@ class Solution
      {
         int n=nums.length;int i;int pivot=0;
         boolean increasing =true;
-        for(i=1;i<n;i++)
+        for(i=0;i<n-1;i++)
         {
-            if(nums[i] < nums[i-1])
+            if(nums[i+1] < nums[i])
             {
-                pivot=i;
+                pivot=i+1;
                 increasing = false;
                 break;
             }
@@ -22,9 +22,9 @@ class Solution
 
             rotatedArray[(i+rotate)%n]=nums[i];
         }
-        for(i=1;i<n;i++)
+        for(i=0;i<n-1;i++)
         {
-            if(rotatedArray[i] < rotatedArray[i-1])
+            if(rotatedArray[i+1] < rotatedArray[i])
                 return false;
 
         }
