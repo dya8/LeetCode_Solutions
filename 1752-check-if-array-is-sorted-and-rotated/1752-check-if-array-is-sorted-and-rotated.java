@@ -8,14 +8,14 @@ class Solution
         {
             if(nums[i+1] < nums[i])
             {
-                pivot=i+1;
+                pivot=i;
                 increasing = false;
                 break;
             }
         }
         if(increasing)
         return true;
-        int rotate = n-pivot;
+        int rotate = n-(pivot+1);
         int rotatedArray[] =new int[n];
         for(i=0;i<n;i++)
         {
